@@ -1,19 +1,19 @@
-# SAFE Dev Tutorials
+# Руководство для разработчиков SAFE
 
-In this series of tutorials, we will present different use cases of the SAFE Launcher API.
+В этом цикле обучающих материалов мы рассматриваем примеры использования API SAFE Launcher.
 
-SAFE Launcher exposes a REST API that applications can use to exchange data with the SAFE Network.
+SAFE Launcher предоставляет REST API, который приложения могут использовать для обмена данными в децентрализованной сети SAFE Network.
 
-**[Read the SAFE Launcher API documentation](https://maidsafe.readme.io/docs/introduction)** to learn more about the SAFE Launcher API.
+**[В документации по API SAFE Launcher](https://maidsafe.readme.io/docs/introduction)** вы найдете более подробное описание.
 
-**[Download SAFE Launcher](https://maidsafe.net/alpha.html)** to use the SAFE Launcher API.
+**[Скачайте SAFE Launcher](https://maidsafe.net/alpha.html)** для использования API.
 
-### What is SAFE Launcher?
+### Что такое SAFE Launcher?
 
-[SAFE Launcher](https://maidsafe.readme.io/docs/launcher) enables you to build SAFE Network apps that don't require users to give you access to their network credentials (their account secret and account password). This means users only have to share their network credentials with SAFE Launcher and not with every application they use. Apps only interact with the SAFE Network indirectly via SAFE Launcher, which can be thought of as the single point of contact with the network.
+[SAFE Launcher](https://maidsafe.readme.io/docs/launcher) позволяет создавать децентрализованные приложения для сети SAFE Network. Такие приложения не потребуют от пользователей ввода паролей и секретных ключей, вместо этого они взаимодействуют с платформой SAFE Launcher, являющиейся единой точкой входа в сеть.
 
-### What is the SAFE Network?
+### Что такое SAFE Network?
 
-The SAFE Network is a decentralized data storage and communications network that provides a secure, efficient and no-cost infrastructure for app developers.
+SAFE Network это децентрализованная сеть для хранения данных и безопасного обмена информацией, которая предоставляет эффективную, бесплатную и безопасную инфраструктуру для разработки приложений.
 
-Rather than using data centers and servers which are prone to data theft and surveillance, the SAFE Network uses advanced peer-to-peer technology that joins together the spare computing capacity of all SAFE users, creating a global network.
+Вместо применения дата-центров и серверов, которые подвержены краже персональных данных и слежке, SAFE Network построена как одноранговая (P2P) сеть, которая объединяет неиспользуемые ресурсы всех ее пользователей на глобальном уровне.
