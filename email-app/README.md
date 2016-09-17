@@ -1,77 +1,77 @@
-# Email app
+# Приложение Email
 
-In this tutorial, you will learn how to build **an email app that works entirely on the SAFE Network**!
+При помощи этого руководства вы научитесь, как сделать **приложение электронной почты, которое работает на базе SAFE Network**.
 
-Instead of relying on an email service provider such as Gmail, or going through the trouble of running your own mail server, you can use the SAFE Network to build dynamic applications such as email and messaging apps.
+Вместо того, чтобы зависеть от сервисов электронной почты вроде Gmail или обременять себя настройкой собственного почтового сервера, вы можете создавать динамические приложения для обмена сообщениями через SAFE Network.
 
-![Compose Mail page](/assets/compose-mail-page.png)
+![Страница создания нового сообщения](/assets/compose-mail-page.png)
 
-![Inbox page](/assets/inbox-page.png)
+![Входящая почта](/assets/inbox-page.png)
 
-## Source code
+## Исходный код
 
-**[Click here to view the source code of this example app on GitHub](https://github.com/maidsafe/safe_examples/tree/master/email_app)**
+**[Исходники для этого примера расположены на GitHub](https://github.com/maidsafe/safe_examples/tree/master/email_app)**
 
-[electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate) was used as a starting point.
+В качестве основы для приложения был использован проект [electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate).
 
-## Overview
+## Краткое содержание
 
-This tutorial will showcase how to:
+В этом руководстве мы рассмотрим следующие темы:
 
-- Create an email ID
-- Send emails to other users
-- Check for new emails
-- Save emails
-- Delete emails
+- Создание ID сообщений
+- Отправка сообщений другим пользователям сети
+- Проверка наличия новых сообщений
+- Сохранение сообщений
+- Удаление сообщений
 
 ### SAFE Launcher API
 
-You will learn about the following APIs:
+Вы изучите следующие API:
 
-- [Authorization](https://maidsafe.readme.io/docs/auth)
-- [Network File System (NFS)](https://maidsafe.readme.io/docs/network-file-system-nfs)
-- [Data Identifier](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/0042-launcher-api-v0.6.md#handle-id)
-- [Structured Data](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/structured_data.md)
-- [Immutable Data](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/immutable_data.md)
-- [Appendable Data](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md)
+- [Авторизация](https://maidsafe.readme.io/docs/auth)
+- [Сетевая файловая система (NFS)](https://maidsafe.readme.io/docs/network-file-system-nfs)
+- [Идентификаторы данных (Data Identifier)](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/0042-launcher-api-v0.6.md#handle-id)
+- [Структурированные данные](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/structured_data.md)
+- [Неизменяемые данные](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/immutable_data.md)
+- [Обновляемые данные](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md)
 
-### User interface
+### Пользовательский интерфейс
 
-The user interface is built using the following front-end libraries:
+Интерфейс пользователя создан с использованием следующих библиотек:
 
 - [React](https://facebook.github.io/react/)
 - [Redux](http://redux.js.org/)
 - [React Router](https://github.com/reactjs/react-router)
 
-Since it's built using [Electron](http://electron.atom.io/), it can be distributed as a desktop app (Windows, OS X and Linux).
+Благодаря применению [Electron](http://electron.atom.io/) проект может распространяться как десктопное приложение для Windows, OS X и Linux.
 
-## Setup
+## Установка
 
-Here are the instructions for running this example app locally.
+Для запуска примера на своем компьютере следуйте дальнейшим инструкциям.
 
-**Make sure SAFE Launcher is running**
+**Убедитесь, что SAFE Launcher запущен**
 
-You need to have [SAFE Launcher v0.9.0](https://github.com/maidsafe/safe_launcher/releases/tag/0.9.0) installed and running to use this example app.
+У вас должен быть установлен и запущен [SAFE Launcher v0.9.0](https://github.com/maidsafe/safe_launcher/releases/tag/0.9.0).
 
-**Make sure you have [Node.js](https://nodejs.org/en/) installed**
+**Убедитесь, что у вас установлен [Node.js](https://nodejs.org/en/)**
 
 ```
 node -v
 ```
 
-**Clone the [GiHub repository](https://github.com/maidsafe/safe_examples)**
+**Склонируйте [Git-репозиторий](https://github.com/maidsafe/safe_examples) проекта**
 
 ```
 git clone https://github.com/maidsafe/safe_examples.git
 ```
 
-**Install the dependencies**
+**Установите зависимости**
 
 ```
 cd email_app && npm install
 ```
 
-**Start the app**
+**Запустите приложение**
 
 ```
 npm run dev
