@@ -1,14 +1,14 @@
-# Initialization
+# Инициализация
 
-There are multiple tasks that the app needs to do during its initialization. Some of these tasks are only necessary if it's the first time you are authorizing this app with your SAFE Network account.
+Во время начальной загрузки приложение должно выполнить несколько действий. Некоторые из них необходимы только в том случае, если вы впервые авторизуете приложение через учетную запись SAFE Network.
 
 <!-- toc -->
 
-![Initialization page](/assets/initialization-page.png)
+![Страница инициализации](/assets/initialization-page.png)
 
-## Authorizing the app
+## Авторизация приложения
 
-The app sends an [authorization request](https://maidsafe.readme.io/docs/auth) to SAFE Launcher.
+Приложение отправляет [запрос на авторизацию](https://maidsafe.readme.io/docs/auth) в SAFE Launcher.
 
 #### POST [/auth](https://maidsafe.readme.io/docs/auth)
 
@@ -29,7 +29,7 @@ export const authoriseApplication = (data) => {
 };
 ```
 
-The `authoriseApplication` function is called using `AUTH_PAYLOAD` as an argument:
+Функция `authoriseApplication` вызывается с аргументом `AUTH_PAYLOAD`:
 
 **initializer.js**
 
@@ -45,14 +45,14 @@ const AUTH_PAYLOAD = {
 };
 ```
 
-The app uses the information contained in its `package.json` file for the following fields:
+Приложение использует информацию из файла `package.json` для получения следующих полей:
 
-* app.name
-* app.vendor
-* app.version
-* app.id
+* **app.name** (название приложения)
+* **app.vendor** (разработчик)
+* **app.version** (версия)
+* **app.id** (уникальный идентификатор приложения)
 
-Therefore, the authorization payload for this app looks like this:
+Следовательно, данные для авторизации приложения выглядят так:
 
 ```json
 {
@@ -66,38 +66,38 @@ Therefore, the authorization payload for this app looks like this:
 }
 ```
 
-The `LOW_LEVEL_API` permission is requested because the app needs to the use the low-level APIs:
+Мы запрашиваем право доступа `LOW_LEVEL_API` для того, чтобы приложение могло использовать низкоуровневые API:
 
-- [Data Identifier](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/0042-launcher-api-v0.6.md#handle-id)
-- [Structured Data](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/structured_data.md)
-- [Immutable Data](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/immutable_data.md)
-- [Appendable Data](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md)
+- [Идентификаторы данных](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/0042-launcher-api-v0.6.md#handle-id)
+- [Структурированные данные](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/structured_data.md)
+- [Неизменяемые данные](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/immutable_data.md)
+- [Обновляемые данные](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md)
 
-> #### info::Why is it necessary to ask for this permission?
+> #### info::Для чего запрашиваются эти права?
 >
-> Since low-level APIs can be used to create data in the network, it might be possible where the data created by the apps cannot be deleted by the user again to retrieve the lost space. Thus, it makes it important to request user for the permission to access low-level APIs.
+> Так как низкоуровневые API могут использоваться для добавления данных в сеть, существует вероятность того, что данные созданные приложениями не могут быть впоследствии удалены пользователем для освобождения места. Поэтому важно явным образом получать разрешение пользователя на доступ к низкоуровневым API.
 >
-> Source: [RFC 42 – SAFE Launcher API v0.6](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/0042-launcher-api-v0.6.md#permission)
+> Источник: [RFC 42 – SAFE Launcher API v0.6](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/0042-launcher-api-v0.6.md#permission)
 
-SAFE Launcher displays a prompt with basic information about the app along with the requested permission (`LOW_LEVEL_API`). You can authorize this request by clicking on "ALLOW".
+SAFE Launcher отобразит окно с основной информацией о приложении и списком запрошенных прав (`LOW_LEVEL_API`). Вы можете авторизовать этот запрос, кликнув на "ALLOW".
 
-![Authorization request](/assets/authorization-request.png)
+![Запрос авторизации](/assets/authorization-request.png)
 
-After you authorize the request, the app receives an authorization token.
+После того, как вы авторизуете запрос, приложение получит авторизационный токен.
 
-> #### info::What is an authorization token?
+> #### info::Что такое авторизационный токен?
 >
-> Authorization tokens are used to invoke APIs that require [authorized access](https://maidsafe.readme.io/docs/introduction#section-authorised-access). These tokens are session based and thus will be valid only while SAFE Launcher is running.
+> Авторизационные токены нужны для вызова методов API, требующих [авторизованного доступа](https://maidsafe.readme.io/docs/introduction#section-authorised-access). Эти токены ограничены временем длительности сессии, поэтому они будут действительны только пока запущен SAFE Launcher.
 
-## Checking for a config file
+## Проверка наличия конфигурации
 
-The app needs a way to store your email data on the SAFE Network. Using the [Structured Data API](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/structured_data.md), we can create a private structured data that will be used by the app to store your email ID and your saved emails. Let's call it the "root structure data".
+Приложение должно каким-то образом хранить вашу электронную почту в SAFE Network. Используя [структурированные данные](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/structured_data.md) мы можем хранить закрытую часть информации о вашем email ID и сохраненных сообщениях. Назовем эту часть «корневыми структурированными данными».
 
-The root structured data will be created using a random ID. In order to be able to retrieve the root structured data later, we need to store its ID in a config file. This config file will be stored in the app's root directory.
+Корневым данным при создании присваевается случайный идентификатор. Нам нужно записать полученный идентификатор в файл конфигурации для дальнейшего получения по нему данных. Файл конфигурации будет храниться в корневой папке приложения.
 
-During the initialization process, if the app detects that you already have a config file, it will try to fetch your root structured data. If you don't have a config file, the app will create one for you.
+Если во время инициализации приложение обнаружит, что конфигурационный файл уже существует, оно попробует запросить корневые данные. Если приложение не найдет файл конфигурации, то оно автоматически создаст его.
 
-The app attempts to retrieve a config file in its root directory:
+Приложение пытается прочитать конфигурацию из своей корневой папки:
 
 #### GET [/nfs/file/:rootPath/:filePath](https://maidsafe.readme.io/docs/nfs-get-file)
 
@@ -123,9 +123,9 @@ export const getConfigFile = token => {
 
 <!-- *(Should we explain why we just fetch the first byte of the config file?)* -->
 
-## If a config file is not found
+## Если конфигурация не найдена
 
-The app creates a root structured data with a random ID. All structured data items need to have an ID that is 32 bytes long. Therefore, the app generates a 32 bytes long random ID:
+Приложение создает корневые данные со случайным идентификатором. Все структрированные данные должны иметь идентификатор длиной в 32 байта. Таким образом, приложение генерирует 32 случайных байта для идентификатора:
 
 **app_utils.js**
 
@@ -135,9 +135,9 @@ export const generateCoreStructreId = () => {
 };
 ```
 
-The root structured data will be used to store your email ID and your saved emails. Since we use an unversioned structured data, you can store as many emails as you want.
+Мы используем корневые данные для записи вашего email ID и сохраненных сообщений. Поскольку при этом мы не применяем версионирование, можно хранить любое количество сообщений.
 
-The email data can be represented using a simple [JSON](https://en.wikipedia.org/wiki/JSON) format:
+Хранимые приложением данные могут быть представлены в виде простого формата [JSON](https://ru.wikipedia.org/wiki/JSON):
 
 ```json
 {
@@ -146,9 +146,9 @@ The email data can be represented using a simple [JSON](https://en.wikipedia.org
 }
 ```
 
-### Creating a root structured data
+### Создание корневых данных
 
-The root structured data is encrypted using symmetric encryption. This means that no one else can read the content of your root structured data. Only you can decrypt it. Also, since we don't need versioning (we only want to show the latest data), we create an [unversioned structured data](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/structured_data.md#create) (type 500).
+Корневые структурированные данные зашифрованы симметричным ключом. Это означает, что никто не сможет увидеть содержимое хранимых данных. Только вы сможете расшифровать их. Также, поскольку мы показываем только актуальные данные, при хранении используются только [неверсионированные структурированные данные](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/structured_data.md#create) (тип 500).
 
 #### POST [/structuredData/:id](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/structured_data.md#create)
 
@@ -173,11 +173,11 @@ export const createCoreStructure = (token, id, data) => ({
 });
 ```
 
-### Creating a config file
+### Создание конфигурации
 
-After the structured data is successfully created, the app stores its ID in a config file. That way, the app will be able to retrieve your email data in the future.
+После того, как мы создали структурированные данные, приложение сохраняет полученный идентификатор в конфигурации. Таким образом, приложение сможет получить их в будущем.
 
-The config file is stored in the app's root directory, which is private. Therefore, the config file will be automatically encrypted and no one else will be able to read it.
+Конфигурация сохраняется в закрытой корневой папке приложения, файлы в которой автоматически шифруются и недоступны для чтения посторонним. Таким образом, файл конфигурации также будет автоматически зашифрован и открыт для чтения только его владельцу.
 
 #### POST [/nfs/file/:rootPath/:filePath](https://maidsafe.readme.io/docs/nfsfile)
 
@@ -202,15 +202,15 @@ export const writeConfigFile = (token, coreId) => {
 };
 ```
 
-After the config file is successfully created, the app transitions to the Create Account page.
+После успешного создания файла конфигурации приложение переходит к странице создания учетной записи:
 
-![Create Account page](/assets/create-account-page.png)
+![Создание учетной записи](/assets/create-account-page.png)
 
-## If a config file is found
+## Если конфигурация найдена
 
-The app fetches your email data (email ID and saved emails) using the ID stored in the config file.
+Используя сохраненный в конфигурации идентификатор, приложение получает по нему информацию о вашей электронной почте (сохраненные письма и email ID).
 
-Before fetching your root structured data, the app needs to obtain a structured data handle using the Data Identifier API.
+Прежде чем получить сами корневые данные, приложению необходимо запросить их дескриптор используя API идентификаторов данных.
 
 <!-- *(explain why handles are needed?)* -->
 
@@ -233,9 +233,9 @@ export const fetchCoreStructureHandler = (token, id) => ({
 });
 ```
 
-### Fetching the root structured data
+### Выборка корневых данных
 
-After the structured data handle is successfully retrieved, the app fetches the root structured data that contains your email data.
+После успешного получения дескриптора, приложение запрашивает корневые данные вашей электронной почты.
 
 #### GET [/structuredData/:handleId](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/structured_data.md#read-data)
 
@@ -258,14 +258,14 @@ export const fetchCoreStructure = (token, id) => ({
 });
 ```
 
-#### If the structured data doesn't contain an email ID
+#### Если в структурированных данных не содержится email ID
 
-If you hadn't created an email ID yet, the app transitions to the Create Account page.
+Если вы пока не создали email ID, приложение отобразит страницу создания учетной записи:
 
-![Create Account page](/assets/create-account-page.png)
+![Создание учетной записи](/assets/create-account-page.png)
 
-#### If the structured data contains an email ID
+#### Если структурированные данные содержат email ID
 
-If you had already created an email ID, the app transitions to the Inbox page.
+Если вы уже создали email ID, приложение перейдет к странице со входящими сообщениями:
 
-![Inbox page](/assets/inbox-page.png)
+![Входящие сообщения](/assets/inbox-page.png)
