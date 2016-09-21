@@ -48,10 +48,10 @@
 
 Такой вид шифрования используется когда вам нужно зашифровать данные только для себя. Никто другой не сможет их прочитать.
 
-Применяется комбинация шифров Salsa20 и Poly1305, как описано [здесь](http://docs.maidsafe.net/rust_sodium/master/rust_sodium/crypto/secretbox/xsalsa20poly1305/index.html) и [здесь](http://nacl.cr.yp.to/valid.html)
+Применяется комбинация шифров Salsa20 и Poly1305, как описано [здесь](http://docs.maidsafe.net/rust_sodium/master/rust_sodium/crypto/secretbox/xsalsa20poly1305/index.html) и [здесь](http://nacl.cr.yp.to/valid.html).
 
 ### Асимметричное
 
 Этот тип шифрования используется когда данные не должны быть доступны для чтения никому кроме владельца закрытого ключа. В результате шифрования даже отправитель не сможет прочитать зашифрованные данные.
 
-В этом случае мы используем комбинацию шифров Curve25519, Blake2B, Salsa20 и Poly1305, о чем указано в [документации](http://docs.maidsafe.net/rust_sodium/master/rust_sodium/crypto/sealedbox/curve25519blake2bxsalsa20poly1305/index.html)
+В этом случае мы используем комбинацию шифров Curve25519, Blake2B, Salsa20 и Poly1305, о чем указано в [документации](http://docs.maidsafe.net/rust_sodium/master/rust_sodium/crypto/sealedbox/curve25519blake2bxsalsa20poly1305/index.html).
