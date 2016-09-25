@@ -2,15 +2,15 @@
 
 В этом цикле обучающих материалов мы рассматриваем примеры использования API SAFE Launcher.
 
-SAFE Launcher предоставляет REST API, который приложения могут использовать для обмена данными в децентрализованной сети SAFE Network.
-
-**[В документации по API SAFE Launcher](https://maidsafe.readme.io/docs/introduction)** вы найдете более подробное описание.
+[SAFE Launcher](https://maidsafe.readme.io/docs/launcher) предоставляет REST API, который приложения могут использовать для обмена данными в децентрализованной сети SAFE Network.
 
 **[Скачайте SAFE Launcher](https://maidsafe.net/alpha.html)** для использования API.
 
+**[В документации по API SAFE Launcher](https://maidsafe.readme.io/docs/introduction)** вы найдете более подробное описание.
+
 ### Что такое SAFE Launcher?
 
-[SAFE Launcher](https://maidsafe.readme.io/docs/launcher) позволяет создавать децентрализованные приложения для сети SAFE Network. Такие приложения не потребуют от пользователей ввода паролей и секретных ключей, вместо этого они взаимодействуют с платформой SAFE Launcher, являющиейся единой точкой входа в сеть.
+SAFE Launcher позволяет создавать децентрализованные приложения для сети SAFE Network. Такие приложения не потребуют от пользователей ввода паролей и секретных ключей, вместо этого они взаимодействуют с платформой SAFE Launcher, являющиейся единой точкой входа в сеть.
 
 ### Что такое SAFE Network?
 
