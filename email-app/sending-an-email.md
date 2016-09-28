@@ -10,7 +10,7 @@
 
 ![Страница создания нового сообщения](/assets/compose-mail-page.png)
 
-Сообщения выше в формате [JSON](https://en.wikipedia.org/wiki/JSON) будет выглядеть следующим образом:
+Сообщение выше в формате [JSON](https://en.wikipedia.org/wiki/JSON) будет выглядеть следующим образом:
 
 ```json
 {
