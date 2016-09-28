@@ -1,16 +1,16 @@
-# Checking for new emails
+# Проверка новых сообщений
 
-When someone sends you a message, it gets stored in the appendable data corresponding to the hash of your email ID. When you refresh your inbox, the app fetches your appendable data and returns all the emails it contains.
+Когда кто-нибудь отправляет вам сообщение, оно сохраняется в обновляемых данных соответствующих хешу вашего email ID. Когда вы обновляете список входящих, приложение запрашивает ваши обновляемые данные и возвращает все содержащиеся там сообщения.
 
-#### Contents
+#### Содержание
 
 <!-- toc -->
 
-![Inbox page](/assets/inbox-page.png)
+![Входящие](/assets/inbox-page.png)
 
-## Fetching the appendable data handle
+## Получение дескриптора обновляемых данных
 
-The app fetches the data identifier handle corresponding to your appendable data:
+Приложение получает дескриптор идентификатора данных, который связан с вашими обновляемым данным:
 
 **app_utils.js**
 
@@ -41,9 +41,9 @@ export const fetchAppendableDataHandler = (token, id) => { // id => appendable d
 };
 ```
 
-## Fetching the appendable data
+## Получение обновляемых данных
 
-The app fetches the metadata of your appendable data. If the data length is 0, it means your inbox is empty.
+Приложение запрашивает метаданные ваших обновляемых данных. Если количество элементов в обновляемых данных равно 0, то это означает, что у вас нет входящих сообщений.
 
 #### HEAD [/appendableData/:handleId](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md#read-appendable-data)
 
@@ -66,9 +66,9 @@ export const fetchAppendableData = (token, handlerId) => {
 };
 ```
 
-### Iterating through the appendable data
+### Обработка обновляемых данных
 
-If the data length is greater than 0, the app iterates through the appendable data. It starts at index 0 and fetches the data identifier corresponding to the first email.
+Если количество элементов в обновляемых данных больше 0, приложение обрабатывает их используя цикл. Приложение начинает обработку с индекса 0 и запрашивает идентификатор данных соответствующий первому сообщению.
 
 #### GET [/appendableData/:handleId/:index](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md#read-appendable-data)
 
@@ -88,9 +88,9 @@ export const fetchDataIdAt = (token, handlerId, index) => ({
 });
 ```
 
-### Fetching the email
+### Получение сообщения
 
-The app fetches the immutable data by using the data identifier of the first email.
+Приложение запрашивает неизменяемые данне используя идентификатор данных первого сообщения.
 
 #### GET [/immutableData/:handleId](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/immutable_data.md#read-using-self-encryptor)
 
@@ -109,7 +109,7 @@ export const fetchMail = (token, handleId) => ({
 });
 ```
 
-It adds the content of the first email to your inbox and then repeats this process for the second email (if there is one). It continues iterating through the appendable data until all your emails have been fetched.
+Приложение добавляет содержимое первого сообщения в ваш список входящих и повторяет описанные действия для всех последующих сообщений (если они есть). Этот процесс продолжается до тех пор, пока не будут получены все сообщения, содержащиеся в обновляемых данных.
 
 **mail_inbox.js**
 
@@ -119,7 +119,7 @@ fetchMail(handlerId) {
   fetchMail(token, handlerId)
     .then(res => {
       if (res.error) {
-        return showError('Fetch Mail Error', res.error.message);
+        return showError('Ошибка получения сообщения', res.error.message);
       }
       const data = new Buffer(res.payload.data).toString();
       pushToInbox(JSON.parse(data));
@@ -133,9 +133,9 @@ fetchMail(handlerId) {
 }
 ```
 
-## Getting the length of the appendable data
+## Получение количества элементов обновляемых данных
 
-To update the amount of space used by the emails in your appendable data, the app fetches the serialized content of your appendable data and measures its length.
+Для отображения занимаемого сообщениями места, приложение запрашивает сериализованное содержимое ваших обновляемых данных и определяет количество содержащихся там элементов.
 
 #### GET /appendableData/serialise/:handleId
 
@@ -156,9 +156,9 @@ export const getAppendableDataLength = (token, handleId) => ({
 });
 ```
 
-## Dropping the appendable data
+## Освобождение обновляемых данных
 
-After refreshing your inbox, the app drops the data identifier handle corresponding to your appendable data.
+После обновления списка входящих, приложение освобождает дескриптор идентификатора данных, который привязан к вашим обновляемым данным.
 
 #### DELETE [/dataId/:handleId](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md#drop-handle)
 
