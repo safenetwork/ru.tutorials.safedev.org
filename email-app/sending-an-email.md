@@ -1,16 +1,16 @@
-# Sending an email
+# Отправка сообщений
 
-To send emails to other SAFE Network users, you need to know their email ID.
+Для отправки сообщений другим пользователям SAFE Network вам должны быть известны их email ID.
 
-First, the app retrieves the encryption key associated with the appendable data that belongs to the recipient. Then, it encrypts the email using that encryption key and saves it as immutable data. Finally, it appends the immutable data that represents the email to the appendable data of the recipient.
+В первую очередь приложение запрашивает ключ шифрования связанный с обновляемыми данными принадлежащими получателю. Затем используя полученный ключ оно зашифровывает сообщение и сохраняет его как неизменяемые данные. На последнем этапе приложение добавляет неизменяемые данные содержащие сообщение к обновляемым данным получателя.
 
-#### Contents
+#### Содержание
 
 <!-- toc -->
 
-![Compose Mail page](/assets/compose-mail-page.png)
+![Страница создания нового сообщения](/assets/compose-mail-page.png)
 
-The [JSON](https://en.wikipedia.org/wiki/JSON) data for the above email would look like this:
+Сообщения выше в формате [JSON](https://en.wikipedia.org/wiki/JSON) будет выглядеть следующим образом:
 
 ```json
 {
@@ -21,9 +21,9 @@ The [JSON](https://en.wikipedia.org/wiki/JSON) data for the above email would lo
 }
 ```
 
-## Fetching the appendable data handle
+## Получение дескриптора обновляемых данных
 
-The app fetches the appendable data handle with an ID corresponding to the hash of the email ID of the recipient:
+Приложение запрашивает дескриптор обновляемых данных с ID соответствующим хешу email ID получателя:
 
 **app_utils.js**
 
@@ -54,9 +54,9 @@ export const fetchAppendableDataHandler = (token, id) => { // id => appendable d
 };
 ```
 
-## Getting the encryption key
+## Получение ключа шифрования
 
-After the appendable data handle is successfully retrieved, the app fetches the public encrytion key of the recipient. By encrypting your email using that encryption key, only the recipient will be able to read it. This is known as asymmetric encryption.
+После успешного получения дескриптора обновляемых данных, приложение запрашивает открытый ключ получателя. Если мы зашифруем сообщение с помощью этого ключа, только получатель сможет его прочитать. Такой подход известен как [асимметричное шифрование](https://ru.wikipedia.org/wiki/Криптосистема_с_открытым_ключом).
 
 #### GET /appendableData/encryptKey/:handleId
 
@@ -76,9 +76,9 @@ export const getEncryptedKey = (token, handleId) => ({
 });
 ```
 
-## Saving the email as immutable data
+## Сохранение сообщения как неизменяемых данных
 
-After the public encryption key of the recipient is successfully retrieved, the app saves your email on the SAFE Network using the [Immutable Data API](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/immutable_data.md).
+После успешного получения открытого ключа получателя, приложение сохраняет сообщение в SAFE Network используя API [неизменяемых данных](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/immutable_data.md).
 
 #### POST [/immutableData](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/immutable_data.md#write-immutable-data-using-self-encryptor)
 
@@ -103,13 +103,13 @@ export const createMail = (token, data, encryptKeyHandler) => ({
 });
 ```
 
-Once the write operation is successful, the API returns a data identifer handle corresponding to the DataMap.
+Как только операция записи завершится успешно, API вернет нам дескриптор идентификатора данных относящийся к структуре DataMap.
 
 <!-- *(explain what is a DataMap)* -->
 
-## Appending the email to the appendable data
+## Добавление сообщения в обновляемые данные
 
-The app adds your email (represented by a DataMap handle) to the appendable data of the recipient.
+Приложение добавляет сообщение (представляемое дескриптором DataMap) в обновляемые данные получателя.
 
 #### PUT [/appendableData/:handleId/:dataIdHandle](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md#append-data)
 
@@ -130,9 +130,9 @@ export const appendAppendableData = (token, id, dataId) => ({
 });
 ```
 
-## Dropping the appendable data handle
+## Освобождение дескриптора обновляемых данных
 
-After your email is successfully appended to the appendable data of the recipient, the app drops the data identifier handle corresponding to the appendable data of the recipient.
+После успешного добавления вашего сообщения, приложение освободит дескриптор идентификатора данных относящегося к обновляемым данным получаталея.
 
 #### DELETE [/dataId/:handleId](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md#drop-handle)
 
