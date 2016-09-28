@@ -78,7 +78,7 @@ export const getEncryptedKey = (token, handleId) => ({
 
 ## Сохранение сообщения как неизменяемых данных
 
-После успешного получения открытого ключа получателя, приложение сохраняет сообщение в SAFE Network используя API [неизменяемых данных](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/immutable_data.md).
+После успешного запроса открытого ключа получателя, приложение сохраняет сообщение в SAFE Network используя API [неизменяемых данных](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/immutable_data.md).
 
 #### POST [/immutableData](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/immutable_data.md#write-immutable-data-using-self-encryptor)
 
