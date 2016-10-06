@@ -1,16 +1,16 @@
-# Saving an email
+# Сохранение сообщений
 
-Your appendable data has a maximum size of 100 KiB. You can save the emails you want to keep by adding them your root structured data (which has no size limit). After you save an email, the app deletes that email from your appendable data. Therefore, it won't show up in your inbox anymore.
+Максимальный размер обновляемых данных равен 100 КиБ. Вы можете сохранять сообщения записывая их в корневые структурированные данные (для которых не установлено лимита). После сохранения сообщения, приложение удаляет его из обновляемых данных. Впоследствии оно не будет отображаться во входящих.
 
-#### Contents
+#### Содержание
 
 <!-- toc -->
 
-![Saved page](/assets/saved-page.png)
+![Страница сохраненных сообщений](/assets/saved-page.png)
 
-## Updating the root structured data
+## Обновление корневых структурированных данных
 
-The app updates the JSON data contained in your root structured data. It will now include the email you want to save.
+Приложение обновляет JSON, содержащийся в ваших корневых структурированных данных. Теперь в них будет записано сообщение, которое вы хотите сохранить.
 
 #### PUT [/structuredData/:handleId](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/structured_data.md#update-structured-data)
 
@@ -35,9 +35,9 @@ export const updateCoreStructure = (token, id, data) => ({
 });
 ```
 
-## Fetching the appendable data handle
+## Получение дескриптора обновляемых данных
 
-The app fetches the data identifier handle corresponding to your appendable data.
+Приложение получает дескриптор идентификатора связанного с обновляемыми данными:
 
 #### GET [/appendableData/handle/:id](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md#get-data-identifier-handle)
 
@@ -60,9 +60,9 @@ export const fetchAppendableDataHandler = (token, id) => { // id => appendable d
 };
 ```
 
-## Deleting the email from the appendable data
+## Удаление сообщения из обновляемых данных
 
-The app deletes the email you just saved from your appendable data. This moves the email to the `deleted_data` field of the appendable data.
+Приложение удаляет сохраненное сообщение из обновляемых данных. Это действие переместит сообщение в поле `deleted_data`, которое хранит удаленную информацию в обновляемых данных.
 
 #### DELETE [/appendableData/:handleId/:index](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md#delete-data-by-index)
 
@@ -85,9 +85,9 @@ export const deleteAppendableData = (token, handleId, index) => {
 };
 ```
 
-## Clear the deleted data of the appendable data
+### Очистка удаленной информации из обновляемых данных
 
-The app clears the `deleted_data` field of your appendable data.
+Приложение очищает поле `deleted_data` в обновляемых данных.
 
 #### DELETE /appendableData/clearDeletedData/:handleId
 
@@ -108,9 +108,9 @@ export const clearDeleteData = (token, handleId) => ({
 });
 ```
 
-## Drop the appendable data handle
+## Освобождение дескриптора обновляемых данных
 
-The app drops the data identifier handle corresponding to your appendable data.
+Приложение освобождает дескриптор идентификатора, привязанного к обновляемым данным.
 
 #### DELETE [/dataId/:handleId](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md#drop-handle)
 
