@@ -1,20 +1,20 @@
-# Deleting an email
+# Удаление сообщений
 
-Your appendable data has a maximum size of 100 KiB. You can delete emails from your inbox by removing them from your appendable data. Your root structured data has no size limit. You can delete emails from your saved folder by removing them from your root structured data.
+Максимальный размер обновляемых данных равен 100 КиБ. Вы можете удалять сообщения стирая их из обновляемых данных. Корневые структурированные данные не имеют лимита по размеру. Вы можете удалить сообщения из папки сохраненных стерев их из корневых структурированных данных.
 
-#### Contents
+#### Содержание
 
 <!-- toc -->
 
-![Inbox page](/assets/inbox-page.png)
+![Страница входящих](/assets/inbox-page.png)
 
-## If the email was in your inbox
+## Если сообщение во входящих
 
-The emails in your inbox are stored in your appendable data. If you want to delete an email from your inbox, you just need to remove it from your appendable data.
+Ваши входящие сообщения хранятся в обновляемых данных. Если вы хотите удалить сообщение из входящих, вам достаточно стереть его из обновляемых данных.
 
-### Fetching the appendable data handle
+### Получение дескриптора обновляемых данных
 
-The app fetches the data identifier handle corresponding to your appendable data.
+Приложение получает дескриптор идентификатора связанного с обновляемыми данными:
 
 #### GET [/appendableData/handle/:id](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md#get-data-identifier-handle)
 
@@ -37,9 +37,9 @@ export const fetchAppendableDataHandler = (token, id) => { // id => appendable d
 };
 ```
 
-### Deleting the email from the appendable data
+### Удаление сообщения из обновляемых данных
 
-The app deletes the email you just saved from your appendable data. This moves the email to the `deleted_data` field of the appendable data.
+Приложение удаляет сообщение, которое вы только что сохранили. Это действие переместит сообщение в поле `deleted_data`, которое хранит удаленную информацию в обновляемых данных.
 
 #### DELETE [/appendableData/:handleId/:index](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md#delete-data-by-index)
 
@@ -62,9 +62,9 @@ export const deleteAppendableData = (token, handleId, index) => {
 };
 ```
 
-### Clear the deleted data of the appendable data
+### Очистка удаленной информации из обновляемых данных
 
-The app clears the `deleted_data` field of your appendable data.
+Приложение очищает поле `deleted_data` в обновляемых данных.
 
 #### DELETE /appendableData/clearDeletedData/:handleId
 
@@ -85,9 +85,9 @@ export const clearDeleteData = (token, handleId) => ({
 });
 ```
 
-### Drop the appendable data handle
+### Освобождение дескриптора обновляемых данных
 
-The app drops the data identifier handle corresponding to your appendable data.
+Приложение освобождает дескриптор идентификатора, привязанного к обновляемым данным.
 
 #### DELETE [/dataId/:handleId](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md#drop-handle)
 
@@ -108,13 +108,13 @@ export const dropHandler = (token, handleId) => ({
 });
 ```
 
-## If the email was in your saved folder
+## Если сообщение в папке сохраненных
 
-The emails in your saved folder are stored in your root structured data. If you want to delete an email from your saved folder, you just need to remove it from your root structured data.
+Сохраненные сообщения записаны в корневых структурированных данных. Если вы хотите удалить сообщение из папки сохраненных, вам достаточно стереть его из корневых структурированных данных.
 
-### Updating the root structured data
+### Обновление корневых структурированных данных
 
-The app updates the JSON data contained in your root structured data. It will now exclude the email you want to delete.
+Приложение обновляет JSON, содержащийся в ваших корневых структурированных данных. В нем теперь не будет записано сообщение, которое вы хотите удалить.
 
 #### PUT [/structuredData/:handleId](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/structured_data.md#update-structured-data)
 
