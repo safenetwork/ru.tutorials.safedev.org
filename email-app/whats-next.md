@@ -1,39 +1,41 @@
-# What's next?
+# Что дальше?
 
-Now that you understand how this example app works, feel free to [fork it](https://github.com/maidsafe/safe_examples) and build your own email app! And stay tuned for more tutorials!
+Теперь, когда вы разобрались с тем, как работает пример, вы можете его [форкнуть](https://github.com/maidsafe/safe_examples) и создать на его основе собственное приложение для обмена электронной почтой.
 
-## New features
+## Новые возможности
 
-Here are some potential features that you might want to build.
+Перечислим некоторые идеи, которые вы можете попробовать реализовать в своем приложении:
 
-### Outbox
+### Отправленные
+
+Помимо сохранения сообщений в корневых структурированных данных, вы также можете сохранять отправленные сообщения.
 
 In addition to storing your saved emails in your root structured data, you could also store your outbox (the emails you send).
 
-### Sending replies
+### Отправка ответов
 
-Currently you have to compose a new email if you want to reply to someone. You could add the ability to send replies.
+Сейчас вам нужно писать новое сообщение каждый раз, когда вы хотите кому-то ответить. Вы можете добавить возможность быстрого ответа на входящие письма.
 
-### Forwarding emails
+### Пересылка сообщений
 
-You could also add the ability to forward an email to other users.
+Также вы можете добавить возможность пересылать полученные сообщения другим пользователям.
 
-### File attachments
+### Прикрепление файлов
 
-You could add ability to upload file attachments by using the [Immutable Data API](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/immutable_data.md).
+Вы можете добавить возможность загружать и прикреплять файлы к письмам используя [API неизменяемых данных](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/immutable_data.md).
 
-### Multiple recipients
+### Несколько получателей
 
-You could add the ability to send an email to multiple recipients. The email would need to be added to the appendable data of each recipient.
+Вы можете добавить возможность отправить сообщение сразу нескольким адресатам. Для реализации вам нужно будет добавить сообщение к обновляемым данным каждого из получателей.
 
-### Spam filtering
+### Фильтрация спама
 
-Using the `filter` field of the appendable data, you could let the user specifcy a blacklist of a whitelist.
+Используя поле `filter` в обновляемых данных, вы можете позволить пользователю определять черный или белый список отправителей сообщений.
 
-> Owner(s) can set `filter` to either blacklist or whitelist. In case it is set to `Filter::BlackList`, the vaults shall enforce the rule of allowing everyone but the blacklisted keys to add to `data` on subsequent updates following the change to `filter`, i.e. existing data in `data` field will not be dealt by the vaults. Similarly, if set to `Filter::WhiteList`, no one but the the whitelisted keys will be allowed to add data.
+> Владелец (владельцы) может установить поле `filter` в значение черного или белого списка. Если оно установлено в `Filter::BlackList`, хранилища должны позволять изменять данные всем пользователям, кроме тех, ключи которых перечислены в черном списке. Это правило применяется только после обновления поля `filter`, т.е. ранее сохраненные данные с ключами из черного списка удалены не будут. Аналогично, если значение фильтра установлено в `Filter::WhiteList`, данные не сможет добавлять никто кроме пользователей, ключи которых явно перечислены в белом списке.
 
-Source: [RFC 38 – Appendable Data](https://github.com/maidsafe/rfcs/blob/master/text/0038-appendable-data/0038-appendable-data.md)
+Источник: [RFC 38 – Appendable Data](https://github.com/maidsafe/rfcs/blob/master/text/0038-appendable-data/0038-appendable-data.md)
 
-### Custom templates
+### Другой интерфейс
 
-Try to build an email app with pre-built template such as [this one](http://purecss.io/layouts/email/).
+Попробуйте создать приложение используя другие шаблоны (например, [этот](http://purecss.io/layouts/email/)).
