@@ -6,34 +6,32 @@
 
 ![Страница создания нового сообщения](/assets/compose-mail-page.png)
 
+#### Содержание
+
+<!-- toc -->
+
 ![Входящая почта](/assets/inbox-page.png)
-
-## Исходный код
-
-**[Исходники для этого примера расположены на GitHub](https://github.com/maidsafe/safe_examples/tree/master/email_app)**
-
-В качестве основы для приложения был использован проект [electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate).
 
 ## Краткое содержание
 
 В этом руководстве мы рассмотрим следующие темы:
 
-- Создание ID сообщений
-- Отправка сообщений другим пользователям сети
-- Проверка наличия новых сообщений
-- Сохранение сообщений
-- Удаление сообщений
+- [Создание ID сообщений](create-an-email-id.md)
+- [Отправка сообщений другим пользователям сети](send-an-email.md)
+- [Проверка наличия новых сообщений](refresh-the-inbox-folder.md)
+- [Сохранение сообщений](save-an-email.md)
+- [Удаление сообщений](delete-an-email.md)
 
-### SAFE Launcher API
+### API
 
 Вы изучите следующие API:
 
-- [Авторизация](https://maidsafe.readme.io/docs/auth)
-- [Сетевая файловая система (NFS)](https://maidsafe.readme.io/docs/network-file-system-nfs)
-- [Идентификаторы данных (Data Identifier)](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/0042-launcher-api-v0.6.md#handle-id)
+- [Авторизация](https://api.safedev.org/auth/)
+- [Сетевая файловая система (NFS)](https://api.safedev.org/nfs/)
 - [Структурированные данные](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/structured_data.md)
 - [Неизменяемые данные](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/immutable_data.md)
 - [Обновляемые данные](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/appendable_data.md)
+- [Идентификаторы данных (Data Identifier)](https://github.com/maidsafe/rfcs/blob/master/text/0042-launcher-api-v0.6/api/data_identifier.md)
 
 ### Пользовательский интерфейс
 
@@ -43,35 +41,54 @@
 - [Redux](http://redux.js.org/)
 - [React Router](https://github.com/reactjs/react-router)
 
+## Исходный код
+
+**[Исходники для этого примера расположены на GitHub](https://github.com/maidsafe/safe_examples/tree/master/email_app)**
+
+В качестве основы для приложения был использован проект [electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate).
+
+### Бинарная сборка
+
+[Скачайте **SAFE Mail Tutorial v0.1.0** на GitHub](https://github.com/maidsafe/safe_examples/releases/tag/0.7.0).
+
 Благодаря применению [Electron](http://electron.atom.io/) проект может распространяться как десктопное приложение для Windows, OS X и Linux.
 
-## Установка
+### Компиляция из исходного кода
 
-Для запуска примера на своем компьютере следуйте дальнейшим инструкциям.
+#### Установка
 
-**Убедитесь, что SAFE Launcher запущен**
+##### 1. SAFE Launcher
 
-У вас должен быть установлен и запущен [SAFE Launcher v0.9.0](https://github.com/maidsafe/safe_launcher/releases/tag/0.9.0).
+Запустите [SAFE Launcher v0.9.0](https://github.com/maidsafe/safe_launcher/releases/tag/0.9.0) и войдите в систему.
 
-**Убедитесь, что у вас установлен [Node.js](https://nodejs.org/en/)**
+##### 2. Node.js
+
+У вас должен быть установлен Node.js версии 4.6.0 (LTS) или 6.7.0 (текущая).
 
 ```
-node -v
+node --version
 ```
 
-**Склонируйте [Git-репозиторий](https://github.com/maidsafe/safe_examples) проекта**
+Node.js можно установить множеством способов. Подробные инструкции можно найти на сайте [nodejs.org](https://nodejs.org/en/download/).
+
+#### Установка
+
+##### 1. Склонируйте [Git-репозиторий](https://github.com/maidsafe/safe_examples) проекта
 
 ```
 git clone https://github.com/maidsafe/safe_examples.git
 ```
 
-**Установите зависимости**
+Если у вас не установлен Git, вы можете скачать его на сайте [git-scm.com](https://git-scm.com/downloads).
+Либо вы можете скачать код одним ZIP-архивом: https://github.com/maidsafe/safe_examples/archive/master.zip.
+
+##### 2. Установите зависимости
 
 ```
 cd email_app && npm install
 ```
 
-**Запустите приложение**
+##### 3. Запустите приложение
 
 ```
 npm run dev
